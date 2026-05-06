@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shauk Paan Order</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT -->
+  <div class="logo-section">
+    <div class="logo-container">
+      <img src="logo.png" alt="Shauk Paan Logo" />
+      <h2>Shauk Paan</h2>
+      <p>Fresh • Hygienic • Authentic</p>
+    </div>
+    
+    <div class="app-footer-info">
+      <label>Contact for System Inquiry</label>
+      <div>Business Solution Engineer</div>
+      <div>📞 8149966950</div>
+      <div>✉️ Solutions@amza.in</div>
+    </div>
+  </div>
+
+
+  <!-- RIGHT -->
+  <div class="form-section">
+    <div class="new-order-wrapper">
+      <a
+        href="https://smoin7.github.io/Shauk-Pan/"
+        class="new-order-btn"
+      >
+        New Order
+      </a>
+    </div>
+
+    <h3>🍃 Place Your Order</h3>
+
+    <div class="section-box">
+       <label><b>Name and Mobile No</b></label>
+      <input id="name" placeholder="Your Name">
+      <input id="mobile" placeholder="Mobile Number">
+    </div>
+
+    <div class="section-box">
+      <label><b>Order Type</b></label>
+      <select id="orderType" onchange="toggleAddress()">
+        <option value="pickup">🍃 Pickup</option>
+        <option value="delivery">🛵 Delivery</option>
+      </select>
+
+      <div id="addressBox" style="display:none;">
+        <textarea id="address" placeholder="Delivery Address"></textarea>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <label><b>Select Branch</b></label>
+      <select id="branch">
+        <option value="">-- Select --</option>
+        <option value="Kondhwa">Kondhwa</option>
+        <option value="Mundwa">Mundwa</option>
+        <option value="Ghorpadi">Ghorpadi</option>
+        <option value="Koregaon Park">Koregaon Park</option>
+      </select>
+    </div>
+
+    <div class="section-box">
+      <h4>Add Items</h4>
+      <div class="item-row">
+        <select id="item"></select>
+        <input type="number" id="qty" value="1" min="1">
+        <button onclick="addItem()">Add</button>
+      </div>
+
+      <ul id="cart"></ul>
+
+      <div id="totalBox">
+        Estimated Total: ₹<span id="totalPrice">0</span>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="bookNow()">Book Now</button>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closePaymentPopup()">×</span>
+
+    <h3>💳 Payment Summary</h3>
+
+    <div id="paymentSummary"></div>
+
+    <div class="final-total-box">
+      <b>Total Amount (Final):</b>
+      ₹<span id="paymentTotal">--</span>
+    </div>
+
+    <!-- Hidden orderId and paymentType for reference -->
+    <span id="orderId" style="display:none;"></span>
+    <span id="currentPaymentType" style="display:none;"></span>
+
+    <div class="payment-actions">
+      <button class="cancel-btn" onclick="closePaymentPopup()">Cancel</button>
+
+      <button class="pay-btn half-pay-btn" onclick="payUpi(50)">
+        Pay 50%
+      </button>
+
+      <button class="pay-btn full-pay-btn" onclick="payUpi(100)">
+        Pay Full
+      </button>
+    </div>
+
+    <!-- Payment URL Display -->
+    <div id="paymentUrlContainer" style="display:none;">
+      
+       <!-- Payment Link Section (First) -->
+      <p style="margin-bottom: 6px; font-size: 12px; font-weight: bold;">💳 Click to Pay (Mobile):</p>
+      <div class="url-row">
+        <a id="paymentUrlLink" href="#" target="_blank" style="flex: 1; text-decoration: none;">
+          <div style="padding: 10px; background: white; border: 1px solid #ddd; border-radius: 6px; color: #1f8a70; font-size: 11px; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <span id="paymentUrlText">Click to open UPI app</span>
+          </div>
+        </a>
+        <button onclick="copyPaymentUrl()" style="padding: 10px 12px; font-size: 12px;">📋 Copy</button>
+      </div>
+      <p class="hint" style="margin: 6px 0 10px 0; font-size: 10px;">👆 Click link to open in PhonePe/GPay/Paytm</p>
+
+      <!-- OR Divider -->
+      <div style="text-align: center; margin: 12px 0; position: relative;">
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 0;">
+        <span style="background: #f0f8ff; padding: 0 8px; position: relative; top: -10px; color: #888; font-size: 11px;">OR</span>
+      </div>
+
+      <!-- QR Code Section (Second) -->
+      <div class="qr-section">
+        <p style="text-align: center; margin-bottom: 6px; font-weight: bold; color: #333; font-size: 12px;">📱 Scan QR Code (Desktop)</p>
+        <div id="qrCodeContainer" style="display: flex; justify-content: center; background: white; padding: 12px; border-radius: 8px; border: 2px solid #1f8a70;">
+          <canvas id="qrCanvas"></canvas>
+        </div>
+        <p style="text-align: center; font-size: 10px; color: #888; margin-top: 6px;">Use any UPI app to scan</p>
+      </div>
+
+      <!-- Have You Paid Button -->
+      <div style="margin-top: 16px; text-align: center;">
+        <button onclick="confirmPaymentPaid()" style="width: 100%; padding: 14px; background: #28a745; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold;">
+          ✅ Have You Paid?
+        </button>
+      </div>
+    </div>
+
+    <p class="upi-hint" style="margin-top: 8px; font-size: 11px;">Complete payment and click button above</p>
+  </div>
+</div>
+
+<!-- LOADING OVERLAY -->
+<div id="loadingOverlay" style="display:none;">
+  <div class="loader-box">
+    <div class="spinner"></div>
+    <p>Creating your order… Please wait</p>
+  </div>
+</div>
+
+<!-- ORDER LOADING MODAL -->
+<div id="orderLoadingModal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <h3>⏳ Creating your order…</h3>
+    <p>Please wait</p>
+  </div>
+</div>
+
+<script src="app.js"></script>
+
+<!-- QR Code Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
+</body>
+</html>
