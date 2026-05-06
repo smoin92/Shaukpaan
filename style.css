@@ -1,0 +1,627 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f6f7fb;
+  margin: 0;
+  padding: 20px;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* LEFT - UPDATED FOR CENTERED LOGO */
+.logo-section {
+  width: 35%;
+  background: linear-gradient(135deg, #7b1e1e, #b12a2a);
+  color: white;
+  text-align: center;
+  padding: 40px 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* LOGO CONTAINER - CENTERED AT TOP */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.logo-section img {
+  max-width: 160px;
+  border-radius: 12px;
+  margin: 0 auto;
+}
+
+.logo-section h2 {
+  margin: 16px 0 8px;
+  font-size: 26px;
+}
+
+.logo-section p {
+  margin: 0;
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+/* RIGHT */
+.form-section {
+  width: 65%;
+  padding: 40px;
+}
+
+.section-box {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.item-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr auto;
+  gap: 10px;
+}
+
+.item-row button {
+  background: #7b1e1e;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.item-row button:hover {
+  background: #631818;
+}
+
+/* CART LIST */
+#cart {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+#cart li {
+  padding: 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#cart li button {
+  background: none;
+  border: none;
+  color: #b12a2a;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+#cart li button:hover {
+  color: #ff0000;
+}
+
+/* TOTAL BOX */
+#totalBox {
+  border: 1px dashed #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: right;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  background: linear-gradient(135deg, #1f8a70, #2fbf9b);
+  color: white;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.modal-content {
+  background: white;
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 24px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  cursor: pointer;
+  font-size: 28px;
+  color: #999;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* PAYMENT SUMMARY */
+#paymentSummary ul {
+  padding-left: 18px;
+  margin: 8px 0;
+}
+
+#paymentSummary li {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+#paymentSummary p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+#paymentSummary hr {
+  margin: 8px 0;
+}
+
+/* FINAL TOTAL */
+.final-total-box {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px solid #ddd;
+  font-size: 16px;
+  text-align: right;
+  color: #1f8a70;
+}
+
+/* PAYMENT ACTIONS */
+.payment-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.cancel-btn {
+  flex: 1;
+  background: #e5e5e5;
+  border: 1px solid #ccc;
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cancel-btn:hover {
+  background: #d0d0d0;
+}
+
+.pay-btn {
+  flex: 1;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.half-pay-btn {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+}
+
+.half-pay-btn:hover {
+  opacity: 0.9;
+}
+
+.full-pay-btn {
+  background: linear-gradient(135deg, #1f8a70, #2fbf9b);
+}
+
+.full-pay-btn:hover {
+  opacity: 0.9;
+}
+
+/* PAYMENT URL CONTAINER */
+#paymentUrlContainer {
+  margin-top: 12px;
+  background: #f0f8ff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #1f8a70;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* QR CODE SECTION */
+.qr-section {
+  margin-bottom: 10px;
+}
+
+.qr-section > p {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+#qrCodeContainer {
+  display: flex;
+  justify-content: center;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #1f8a70;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#qrCanvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#paymentUrlContainer p {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #666;
+  font-weight: bold;
+}
+
+#paymentUrlContainer .url-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#paymentUrlLink {
+  flex: 1;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+#paymentUrlLink:hover {
+  transform: scale(1.02);
+}
+
+#paymentUrlLink div {
+  padding: 10px;
+  background: white;
+  border: 2px solid #1f8a70;
+  border-radius: 6px;
+  color: #1f8a70;
+  font-size: 12px;
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#paymentUrlLink:hover div {
+  background: #e8f5f1;
+  border-color: #176d59;
+}
+
+#paymentUrlContainer button {
+  padding: 10px 16px;
+  background: #1f8a70;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+#paymentUrlContainer button:hover {
+  background: #176d59;
+}
+
+#paymentUrlContainer .hint {
+  margin: 8px 0 0 0;
+  font-size: 11px;
+  color: #888;
+  font-weight: normal;
+}
+
+.upi-hint {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-top: 12px;
+}
+
+/* LOADING OVERLAY */
+#loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.loader-box {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1f8a70;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===============================
+   NEW ORDER BUTTON (TOP RIGHT)
+   =============================== */
+.new-order-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2000;
+
+  font-size: 18px;
+  padding: 10px 22px;
+  background: #198754;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.new-order-btn:hover {
+  opacity: 0.9;
+}
+
+.new-order-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===============================
+   LEFT PANEL FOOTER INFO
+   =============================== */
+.app-footer-info {
+  text-align: left;
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.app-footer-info label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.app-footer-info div {
+  margin: 4px 0;
+}
+
+.app-footer-info div:first-of-type {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* RESPONSIVE FOOTER */
+.responsive-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: white;
+}
+
+/* MOBILE FOOTER HIDDEN ON DESKTOP */
+.mobile-footer {
+  display: none;
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+   =============================== */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .logo-section,
+  .form-section {
+    width: 100%;
+  }
+
+  /* FIXED: Proper mobile layout for logo section */
+  .logo-section {
+    padding: 30px 20px 20px;
+    min-height: auto;
+  }
+
+  .logo-container {
+    margin-bottom: 20px;
+  }
+
+  .logo-section img {
+    max-width: 140px;
+  }
+
+  .logo-section h2 {
+    font-size: 22px;
+    margin: 12px 0 6px;
+  }
+
+  .logo-section p {
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+
+  /* FIXED: Prevent text merging in footer */
+  .app-footer-info {
+    position: static;
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .app-footer-info label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .app-footer-info div {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  /* Hide footer from red/logo area */
+  .logo-section .responsive-footer {
+    display: none;
+  }
+
+  /* Show footer below Book Now button */
+  .mobile-footer {
+    display: block;
+    background: #8b1d1d;
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .form-section {
+    padding: 24px 20px;
+  }
+
+  .payment-actions {
+    flex-direction: column;
+  }
+
+  .modal {
+    padding: 10px 0;
+  }
+
+  .modal-content {
+    margin: 10px auto;
+    max-width: 95%;
+    padding: 20px 16px;
+    max-height: 95vh;
+  }
+
+  #qrCodeContainer {
+    padding: 8px;
+  }
+
+  .qr-section p {
+    font-size: 11px;
+  }
+
+  #paymentUrlContainer {
+    padding: 12px;
+  }
+
+  #paymentUrlLink div {
+    font-size: 10px;
+    padding: 8px;
+  }
+
+  .new-order-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* OPTION STYLING FOR CATEGORIES */
+select option:disabled {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  color: #666;
+  font-style: italic;
+}
